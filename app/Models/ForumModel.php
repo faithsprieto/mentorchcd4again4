@@ -49,7 +49,7 @@ class ForumModel extends Model
         FROM forum_comments c
         LEFT JOIN user u ON u.student_id = c.student_id
         WHERE c.post_id = ?
-        ORDER BY c.date_time DESC
+        ORDER BY c.date_time ASC
         LIMIT ? OFFSET ?
         SQL;
 

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AdminDashboardModel extends Model
+class AdminModel extends Model
 {
 
     public function getUserStats()

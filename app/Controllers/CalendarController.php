@@ -23,4 +23,14 @@ class CalendarController extends ResourceController
             "data" => $calendar
         ]);
     }
+
+    public function getStudentCalendar($studentId)
+    {
+        $calendar = $this->calendarModel->getStudentCalendar($studentId);
+
+        return $this->respond([
+            "status" => 200,
+            "data" => $calendar
+        ]);
+    }
 }

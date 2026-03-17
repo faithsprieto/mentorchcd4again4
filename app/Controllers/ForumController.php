@@ -14,6 +14,7 @@ class ForumController extends ResourceController
         $this->forumModel = new ForumModel();
     }
 
+    //ALL POSTS
     public function getAllPosts()
     {
         $db = \Config\Database::connect();
@@ -33,6 +34,7 @@ class ForumController extends ResourceController
         return $this->respond($posts);
     }
 
+    //ONE POST FOR VIEWING
     public function getPost($postId)
     {
         $db = \Config\Database::connect();
@@ -55,6 +57,7 @@ class ForumController extends ResourceController
         return $this->respond($post);
     }
 
+    //BOOKMARKS
     public function getBookmarks($studentId)
     {
         $db = \Config\Database::connect();
@@ -70,5 +73,27 @@ class ForumController extends ResourceController
         }
 
         return $this->respond($bookmarks);
+    }
+
+    //COMMENTS
+    public function getComments($postId)
+    {
+        $sql = <<<SQL
+        SELECT
+            c.comment_id,
+            c.post_id,
+            c.student_id,
+            u.first_name,
+            u.last_name,
+            u.profile_picture,
+            c.comment_description,
+            c.date_time
+        FROM forum_comments c
+        LEFT JOIN user u ON u.student_id = c.student_id
+        WHERE c.post_id = ?
+        ORDER BY c.date_time ASC
+        SQL;
+
+        return $this->db->query($sql, [$postId])->getResultArray();
     }
 }
