@@ -4,11 +4,24 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ForumModel extends Model
+class Forum_PostsModel extends Model
 {
-    protected $table = 'forum_posts';
-    protected $primaryKey = 'post_id';
+    protected $table            = 'forum_posts';
+    protected $primaryKey       = 'post_id';
+    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
 
+    protected $returnType       = 'array';
+    protected $protectFields    = true;
+
+    protected $allowedFields = [
+        'student_id',
+        'post_title',
+        'post_description',
+        'post_attachments',
+        'date_time',
+    ];
+
+    protected $useTimestamps = true;
     public function getPosts($limit, $offset)
     {
         $sql = <<<SQL
@@ -57,21 +70,5 @@ class ForumModel extends Model
     }
 
 
-    public function getBookmarks($studentId)
-    {
-        $sql = <<<SQL
-        SELECT
-            b.bookmark_id,
-            b.post_id,
-            p.post_title,
-            p.date_time
-        FROM forum_bookmarks b
-        JOIN forum_posts p ON p.post_id = b.post_id
-        WHERE b.student_id = ?
-        SQL;
-
-        return $this->db->query($sql, [$studentId])->getResultArray();
-    }
-
-   
+    
 }

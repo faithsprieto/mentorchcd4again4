@@ -16,24 +16,27 @@ class MessagesController extends ResourceController
 
     public function getMessagesByChat($chatId)
     {
-        $limit = 30;
-        $page = $this->request->getGet('page') ?? 1;
-        $offset = ($page - 1) * $limit;
-
         $db = \Config\Database::connect();
         $db->transStart();
 
         try {
 
-            $messages = $this->messagesModel->getChatMessages($chatId, $limit, $offset);
+            $perPage = 20;
+
+            $messages = $this->messagesModel->getPaginatedChatMessages($chatId, $perPage);
+
+            $pager = $this->messagesModel->pager;
 
             $db->transComplete();
 
             return $this->respond([
                 "status" => "success",
-                "page" => $page,
-                "limit" => $limit,
-                "data" => $messages
+                "data" => $messages,
+                "pager" => [
+                    "currentPage" => $pager->getCurrentPage(),
+                    "totalPages" => $pager->getPageCount(),
+                    "perPage" => $perPage
+                ]
             ]);
 
         } catch (\Exception $e) {

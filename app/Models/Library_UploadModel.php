@@ -4,12 +4,27 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class LibraryModel extends Model
+class Library_UploadModel extends Model
 {
-    protected $table = 'library_upload';
-    protected $primaryKey = 'file_id';
-    protected $returnType = 'array';
+    protected $table            = 'library_upload';
+    protected $primaryKey       = 'file_id';
+    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
 
+    protected $returnType       = 'array';
+    protected $protectFields    = true;
+
+    protected $allowedFields = [
+        'student_id',
+        'title',
+        'file_name',
+        'badges',
+        'file_type',
+        'file_path',
+        'file_size',
+        'upload_date',
+    ];
+
+    protected $useTimestamps = true;
     public function getAllLibraryFiles()
     {
         $db = \Config\Database::connect();

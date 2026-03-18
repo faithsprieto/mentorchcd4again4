@@ -6,9 +6,25 @@ use CodeIgniter\Model;
 
 class CalendarModel extends Model
 {
-    protected $table = 'calendar';
-    protected $primaryKey = 'calendar_id';
+    protected $table            = 'calendar';
+    protected $primaryKey       = 'calendar_id';
+    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
 
+    protected $returnType       = 'array';
+    protected $protectFields    = true;
+
+    protected $allowedFields = [
+        'student_id',
+        'title',
+        'date_time',
+        'duration',
+        'status',
+        'description',
+        'sync_with',
+        'is_deleted',
+    ];
+
+    protected $useTimestamps = true;
     public function getStudentCalendar($studentId)
 {
     $db = \Config\Database::connect();
