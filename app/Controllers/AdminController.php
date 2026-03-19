@@ -206,30 +206,52 @@ class AdminController extends ResourceController
     }
 
     public function approveLibraryUpload($requestId)
-    {
-        $this->db->transStart();
-
-        $this->Library_Upload_RequestModel->approveLibraryUpload($requestId);
-
-        $this->db->transComplete();
-
-        return $this->respond([
-            "status" => "approved"
-        ]);
+{
+    if (!$requestId) {
+        return $this->failValidationErrors('Request ID is required');
     }
+
+    $this->db->transStart();
+
+    try {
+        $this->libraryRequestModel->approveLibraryUpload($requestId);
+    } catch (\Exception $e) {
+        $this->db->transRollback();
+        return $this->fail($e->getMessage());
+    }
+
+    $this->db->transComplete();
+
+    if ($this->db->transStatus() === false) {
+        return $this->fail('Failed to approve upload');
+    }
+
+    return $this->respond([
+        "status" => "approved"
+    ]);
+}
+
 
     public function rejectLibraryUpload($requestId)
-    {
-        $this->db->transStart();
-
-        $this->Library_Upload_RequestModel->rejectLibraryUpload($requestId);
-
-        $this->db->transComplete();
-
-        return $this->respond([
-            "status" => "rejected"
-        ]);
+{
+    if (!$requestId) {
+        return $this->failValidationErrors('Request ID is required');
     }
+
+    $this->db->transStart();
+
+    $this->libraryRequestModel->rejectLibraryUpload($requestId);
+
+    $this->db->transComplete();
+
+    if ($this->db->transStatus() === false) {
+        return $this->fail('Failed to reject upload');
+    }
+
+    return $this->respond([
+        "status" => "rejected"
+    ]);
+}
 
     public function getActivityLogs()
     {

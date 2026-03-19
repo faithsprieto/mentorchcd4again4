@@ -3,16 +3,16 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\LibraryModel;
+use App\Models\Library_UploadModel;
 
 class LibraryController extends ResourceController
 {
-    protected $libraryModel;
+    protected $Library_UploadModel;
     protected $db;
 
     public function __construct()
     {
-        $this->libraryModel = new LibraryModel();
+        $this->Library_UploadModel = new Library_UploadModel();
         $this->db = \Config\Database::connect();
     }
 
@@ -20,7 +20,7 @@ class LibraryController extends ResourceController
     {
         $this->db->transStart();
 
-        $files = $this->libraryModel->getAllLibraryFiles();
+        $files = $this->Library_UploadModel->getAllLibraryFiles();
 
         $this->db->transComplete();
 
