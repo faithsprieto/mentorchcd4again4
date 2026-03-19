@@ -8,13 +8,12 @@ class Activity_LogsModel extends Model
 {
     protected $table            = 'activity_logs';
     protected $primaryKey       = 'activity_log_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
 
     protected $allowedFields = [
-        'activity_log_id',
         'operation_type',
         'timestamp'
     ];

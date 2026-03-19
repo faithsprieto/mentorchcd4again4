@@ -8,7 +8,7 @@ class Forum_CommentsModel extends Model
 {
     protected $table            = 'forum_comments';
     protected $primaryKey       = 'comment_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

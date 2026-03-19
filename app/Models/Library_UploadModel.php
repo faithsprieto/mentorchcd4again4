@@ -8,7 +8,7 @@ class Library_UploadModel extends Model
 {
     protected $table            = 'library_upload';
     protected $primaryKey       = 'file_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -25,6 +25,7 @@ class Library_UploadModel extends Model
     ];
 
     protected $useTimestamps = true;
+    
     public function getAllLibraryFiles()
     {
         $db = \Config\Database::connect();

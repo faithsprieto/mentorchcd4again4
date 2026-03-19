@@ -8,7 +8,7 @@ class User_ProgressModel extends Model
 {
     protected $table            = 'user_progress';
     protected $primaryKey       = 'progress_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

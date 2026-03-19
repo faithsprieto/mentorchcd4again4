@@ -8,7 +8,7 @@ class CalendarModel extends Model
 {
     protected $table            = 'calendar';
     protected $primaryKey       = 'calendar_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; // marked AUTO_INCREMENT in dump
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -25,6 +25,8 @@ class CalendarModel extends Model
     ];
 
     protected $useTimestamps = true;
+
+    //GET STUDENT
     public function getStudentCalendar($studentId)
 {
     $db = \Config\Database::connect();

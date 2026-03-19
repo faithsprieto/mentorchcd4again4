@@ -8,7 +8,7 @@ class MessageModel extends Model
 {
     protected $table            = 'messages';
     protected $primaryKey       = 'messages_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

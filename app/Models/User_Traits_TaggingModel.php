@@ -8,7 +8,7 @@ class User_Traits_TaggingModel extends Model
 {
     protected $table            = 'user_traits_tagging';
     protected $primaryKey       = 'trait_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

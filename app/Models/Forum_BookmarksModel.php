@@ -8,7 +8,7 @@ class Forum_BookmarksModel extends Model
 {
     protected $table            = 'forum_bookmarks';
     protected $primaryKey       = 'bookmarks_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -19,7 +19,7 @@ class Forum_BookmarksModel extends Model
         'post_id',
     ];
 
-    protected $useTimestamps = true;
+
     public function getBookmarks($studentId)
     {
         $sql = <<<SQL

@@ -8,7 +8,7 @@ class Library_TaggingModel extends Model
 {
     protected $table            = 'library_tagging';
     protected $primaryKey       = 'tag_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; // not marked AUTO_INCREMENT in dump
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -18,5 +18,5 @@ class Library_TaggingModel extends Model
         'keyword_id',
     ];
 
-    protected $useTimestamps = true;
+
 }

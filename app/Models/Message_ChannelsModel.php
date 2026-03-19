@@ -17,5 +17,5 @@ class Message_ChannelsModel extends Model
         'channel_type',
     ];
 
-    protected $useTimestamps = true;
+    
 }

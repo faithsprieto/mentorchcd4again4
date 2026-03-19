@@ -7,16 +7,16 @@ use App\Models\CalendarModel;
 
 class CalendarController extends ResourceController
 {
-    protected $calendarModel;
+    protected $CalendarModel;
 
     public function __construct()
     {
-        $this->calendarModel = new CalendarModel();
+        $this->CalendarModel = new CalendarModel();
     }
 
     public function getAllCalendar()
     {
-        $calendar = $this->calendarModel->getAllCalendar();
+        $calendar = $this->CalendarModel->getAllCalendar();
 
         return $this->respond([
             "status" => 200,
@@ -26,7 +26,7 @@ class CalendarController extends ResourceController
 
     public function getStudentCalendar($studentId)
     {
-        $calendar = $this->calendarModel->getStudentCalendar($studentId);
+        $calendar = $this->CalendarModel->getStudentCalendar($studentId);
 
         return $this->respond([
             "status" => 200,

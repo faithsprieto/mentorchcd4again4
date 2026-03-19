@@ -8,7 +8,7 @@ class Calendar_SyncModel extends Model
 {
     protected $table            = 'calendar_sync';
     protected $primaryKey       = 'calendar_sync_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

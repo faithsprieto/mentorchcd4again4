@@ -8,7 +8,7 @@ class MentorchipModel extends Model
 {
     protected $table            = 'mentorchip';
     protected $primaryKey       = 'mentorch_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -24,6 +24,7 @@ class MentorchipModel extends Model
     ];
 
     protected $useTimestamps = true;
+
     public function getAllMentorchips()
     {
         $sql = <<<SQL

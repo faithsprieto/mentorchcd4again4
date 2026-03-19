@@ -8,7 +8,7 @@ class SubjectModel extends Model
 {
     protected $table            = 'subject';
     protected $primaryKey       = 'subject_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -17,5 +17,5 @@ class SubjectModel extends Model
         'subject_tag',
     ];
 
-    protected $useTimestamps = true;
+
 }

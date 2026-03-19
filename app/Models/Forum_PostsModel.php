@@ -8,7 +8,7 @@ class Forum_PostsModel extends Model
 {
     protected $table            = 'forum_posts';
     protected $primaryKey       = 'post_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -22,6 +22,8 @@ class Forum_PostsModel extends Model
     ];
 
     protected $useTimestamps = true;
+
+
     public function getPosts($limit, $offset)
     {
         $sql = <<<SQL

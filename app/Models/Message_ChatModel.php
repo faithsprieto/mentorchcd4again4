@@ -8,7 +8,7 @@ class Message_ChatModel extends Model
 {
     protected $table            = 'message_chat';
     protected $primaryKey       = 'chat_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

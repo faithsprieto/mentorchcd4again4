@@ -8,7 +8,7 @@ class Library_Upload_RequestModel extends Model
 {
     protected $table            = 'library_upload_request';
     protected $primaryKey       = 'request_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -24,6 +24,7 @@ class Library_Upload_RequestModel extends Model
     ];
 
     protected $useTimestamps = true;
+
     public function getPendingLibraryUploads()
     {
         $sql = <<<SQL
@@ -44,16 +45,54 @@ class Library_Upload_RequestModel extends Model
 
         return $this->db->query($sql)->getResult();
     }
+
     public function approveLibraryUpload($requestId)
     {
-        $sql = <<<SQL
+    
+    //FETCH DATA
+    $sqlFetch = <<<SQL
+        SELECT *
+        FROM library_upload_request
+        WHERE request_id = ?
+        AND status = 'pending'
+    SQL;
+
+    $request = $this->db->query($sqlFetch, [$requestId])->getRowArray();
+
+    if (!$request) {
+        throw new \Exception("Request not found or already processed.");
+    }
+
+    // INSERT DATA INTO LIBRARY
+    $sqlInsert = <<<SQL
+        INSERT INTO library_upload (
+            student_id,
+            title,
+            file_name,
+            file_path,
+            badges,
+            file_type,
+            file_size
+        )
+        VALUES (?, ?, ?, ?, '', '', 0)
+    SQL;
+
+    $this->db->query($sqlInsert, [
+        $request['student_id'],
+        $request['title'],
+        $request['file_name'],
+        $request['file_path']
+    ]);
+
+    // UPDATE 
+    $sqlUpdate = <<<SQL
         UPDATE library_upload_request
         SET status = 'accepted',
             updated_on = NOW()
         WHERE request_id = ?
-        SQL;
+    SQL;
 
-        return $this->db->query($sql, [$requestId]);
+    return $this->db->query($sqlUpdate, [$requestId]);
     }
 
     public function rejectLibraryUpload($requestId)

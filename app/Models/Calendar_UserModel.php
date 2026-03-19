@@ -8,7 +8,7 @@ class Calendar_UserModel extends Model
 {
     protected $table            = 'calendar_user';
     protected $primaryKey       = 'calendar_user_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; // marked AUTO_INCREMENT in dump
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -18,5 +18,4 @@ class Calendar_UserModel extends Model
         'student_id',
     ];
 
-    protected $useTimestamps = true;
 }

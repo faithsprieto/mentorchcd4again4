@@ -8,7 +8,7 @@ class OrganisationsModel extends Model
 {
     protected $table            = 'organisations';
     protected $primaryKey       = 'org_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

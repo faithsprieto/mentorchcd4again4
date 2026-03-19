@@ -8,7 +8,7 @@ class User_GoalsModel extends Model
 {
     protected $table            = 'user_goals';
     protected $primaryKey       = 'goal_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

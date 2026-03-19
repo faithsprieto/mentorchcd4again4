@@ -18,5 +18,5 @@ class Subject_TaggingModel extends Model
         'keyword_id',
     ];
 
-    protected $useTimestamps = true;
+ 
 }

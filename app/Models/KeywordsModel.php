@@ -8,7 +8,7 @@ class KeywordsModel extends Model
 {
     protected $table            = 'keywords';
     protected $primaryKey       = 'keyword_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
@@ -17,7 +17,7 @@ class KeywordsModel extends Model
         'keyword_tag',
     ];
 
-    protected $useTimestamps = true;
+ 
     // KEYWORDS
     public function getKeywords()
     {

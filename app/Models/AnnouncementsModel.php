@@ -8,13 +8,12 @@ class AnnouncementsModel extends Model
 {
     protected $table            = 'announcements';
     protected $primaryKey       = 'announcement_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
 
     protected $allowedFields = [
-        'announcement_id',
         'department_id',
         'title',
         'description',
@@ -24,6 +23,7 @@ class AnnouncementsModel extends Model
     ];
 
     protected $useTimestamps = true;
+    
     // ANNOUNCEMENTS
     public function getAnnouncements()
     {

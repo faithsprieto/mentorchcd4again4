@@ -28,6 +28,7 @@ class UserModel extends Model
     ];
 
     protected $useTimestamps = true;
+    
     public function getUserStats()
     {
         $sql = <<<SQL

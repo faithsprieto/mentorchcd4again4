@@ -205,11 +205,11 @@ class AdminController extends ResourceController
         );
     }
 
-    public function approveLibraryUploads($requestId)
+    public function approveLibraryUpload($requestId)
     {
         $this->db->transStart();
 
-        $this->Library_Upload_RequestModel->approveLibraryUploads($requestId);
+        $this->Library_Upload_RequestModel->approveLibraryUpload($requestId);
 
         $this->db->transComplete();
 
@@ -218,11 +218,11 @@ class AdminController extends ResourceController
         ]);
     }
 
-    public function rejectLibraryUploads($requestId)
+    public function rejectLibraryUpload($requestId)
     {
         $this->db->transStart();
 
-        $this->Library_Upload_RequestModel->rejectLibraryUploads($requestId);
+        $this->Library_Upload_RequestModel->rejectLibraryUpload($requestId);
 
         $this->db->transComplete();
 
