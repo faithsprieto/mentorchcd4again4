@@ -10,52 +10,58 @@ class Forum_PostsModel extends Model
     protected $primaryKey = 'post_id';
     protected $returnType = 'array';
 
-    public function getPosts()
-    {
-        $sql = <<<SQL
-        SELECT
-            p.post_id,
-            p.student_id,
-            u.first_name,
-            u.last_name,
-            u.profile_picture,
-            u.department,
-            u.course_program,
-            p.post_title,
-            p.post_description,
-            p.post_attachment,
-            p.date_time
-        FROM forum_posts p
-        LEFT JOIN user u ON u.student_id = p.student_id
-        ORDER BY p.date_time DESC
-        SQL;
 
-        return $this->query($sql)->getResultArray();
+    // ========================
+    // PAGINATED POSTS (15)
+    // ========================
+    public function getPostsPaginated($perPage = 15)
+    {
+        return $this
+            ->select('
+                forum_posts.post_id,
+                forum_posts.student_id,
+                user.first_name,
+                user.last_name,
+                user.profile_picture,
+                user.department,
+                user.course_program,
+                forum_posts.post_title,
+                forum_posts.post_description,
+                forum_posts.post_attachment,
+                forum_posts.date_time
+            ')
+            ->join('user', 'user.student_id = forum_posts.student_id', 'left')
+            ->orderBy('forum_posts.date_time', 'DESC')
+            ->paginate($perPage);
     }
 
 
-    public function getComments($postId)
+    // ========================
+    // PAGINATED COMMENTS (20)
+    // ========================
+    public function getCommentsPaginated($postId, $perPage = 20)
     {
-        $sql = <<<SQL
-        SELECT
-            c.comment_id,
-            c.post_id,
-            c.student_id,
-            u.first_name,
-            u.last_name,
-            u.profile_picture,
-            c.comment_description,
-            c.date_time
-        FROM forum_comments c
-        LEFT JOIN user u ON u.student_id = c.student_id
-        WHERE c.post_id = ?
-        ORDER BY c.date_time ASC
-        SQL;
-
-        return $this->db->query($sql, [$postId])->getResultArray();
+        return $this->db->table('forum_comments')
+            ->select('
+                forum_comments.comment_id,
+                forum_comments.post_id,
+                forum_comments.student_id,
+                user.first_name,
+                user.last_name,
+                user.profile_picture,
+                forum_comments.comment_description,
+                forum_comments.date_time
+            ')
+            ->join('user', 'user.student_id = forum_comments.student_id', 'left')
+            ->where('forum_comments.post_id', $postId)
+            ->orderBy('forum_comments.date_time', 'ASC')
+            ->paginate($perPage);
     }
 
 
+    // ========================
+    // ATTACHMENTS (keep raw SQL)
+    // ========================
     public function getAttachmentsByPostIds($postIds)
     {
         if (empty($postIds)) return [];
@@ -88,5 +94,26 @@ class Forum_PostsModel extends Model
         SQL;
 
         return $this->db->query($sql, [$postId])->getResultArray();
+    }
+
+    // ========================
+    // BOOKMARKS 
+    // ========================
+
+    public function getBookmarks($studentId)
+    {
+    $sql = <<<SQL
+    SELECT
+        b.bookmark_id,
+        b.post_id,
+        p.post_title,
+        p.date_time
+    FROM forum_bookmarks b
+    JOIN forum_posts p ON p.post_id = b.post_id
+    WHERE b.student_id = ?
+    ORDER BY p.date_time DESC
+    SQL;
+
+    return $this->db->query($sql, [$studentId])->getResultArray();
     }
 }

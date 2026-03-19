@@ -3,45 +3,36 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
-
 use App\Models\Forum_PostsModel;
 
 class ForumController extends ResourceController
 {
     protected $Forum_PostsModel;
 
-
-
     public function __construct()
     {
         $this->Forum_PostsModel = new Forum_PostsModel();
     }
 
-    //GET POSTS
+    // ========================
+    // GET POSTS (PAGINATED 15)
+    // ========================
     public function getPosts()
     {
-        $posts = $this->Forum_PostsModel
-            ->select('
-                forum_posts.post_id,
-                forum_posts.student_id,
-                user.first_name,
-                user.last_name,
-                user.profile_picture,
-                user.department,
-                user.course_program,
-                forum_posts.post_title,
-                forum_posts.post_description,
-                forum_posts.post_attachment,
-                forum_posts.date_time
-            ')
-            ->join('user', 'user.student_id = forum_posts.student_id', 'left')
-            ->orderBy('forum_posts.date_time', 'DESC')
-            ->paginate(15);
+        $db = \Config\Database::connect();
 
+        $db->transStart();
 
-    // GET ATTACHMENTS
+        // ✅ Use model paginate
+        $posts = $this->Forum_PostsModel->getPostsPaginated(15);
+
+        // 🔥 Attachments batching
         $postIds = array_column($posts, 'post_id');
-        $attachments = $this->Forum_PostsModel->getAttachmentsByPostIds($postIds);
+
+        $attachments = [];
+        if (!empty($postIds)) {
+            $attachments = $this->Forum_PostsModel->getAttachmentsByPostIds($postIds);
+        }
 
         $grouped = [];
         foreach ($attachments as $att) {
@@ -52,31 +43,63 @@ class ForumController extends ResourceController
             $post['attachments'] = $grouped[$post['post_id']] ?? [];
         }
 
+        $db->transComplete();
+
         return $this->respond([
             'data' => $posts,
             'pager' => $this->Forum_PostsModel->pager->getDetails()
         ]);
     }
 
-    //GET COMMENTS
+
+    // ========================
+    // GET SINGLE POST
+    // ========================
+    public function getPost($postId)
+    {
+        $db = \Config\Database::connect();
+
+        $db->transStart();
+
+        // ⚠️ Since paginate is used, we fetch directly
+        $post = $this->Forum_PostsModel
+            ->where('post_id', $postId)
+            ->first();
+
+        if (!$post) {
+            return $this->failNotFound('Post not found');
+        }
+
+        // 🔥 Attachments
+        $attachments = $this->Forum_PostsModel->getAttachmentsByPostId($postId);
+
+        // 🔥 Comments (first page)
+        $comments = $this->Forum_PostsModel->getCommentsPaginated($postId, 20);
+
+        $db->transComplete();
+
+        $post['attachments'] = $attachments;
+        $post['comments'] = [
+            'data' => $comments,
+            'pager' => $this->Forum_PostsModel->pager->getDetails()
+        ];
+
+        return $this->respond($post);
+    }
+
+
+    // ========================
+    // GET COMMENTS (PAGINATED 20)
+    // ========================
     public function getComments($postId)
     {
-        $comments = $this->Forum_PostsModel
-            ->select('
-                forum_comments.comment_id,
-                forum_comments.post_id,
-                forum_comments.student_id,
-                user.first_name,
-                user.last_name,
-                user.profile_picture,
-                forum_comments.comment_description,
-                forum_comments.date_time
-            ')
-            ->from('forum_comments')
-            ->join('user', 'user.student_id = forum_comments.student_id', 'left')
-            ->where('forum_comments.post_id', $postId)
-            ->orderBy('forum_comments.date_time', 'ASC')
-            ->paginate(20);
+        $db = \Config\Database::connect();
+
+        $db->transStart();
+
+        $comments = $this->Forum_PostsModel->getCommentsPaginated($postId, 20);
+
+        $db->transComplete();
 
         return $this->respond([
             'data' => $comments,
@@ -84,10 +107,19 @@ class ForumController extends ResourceController
         ]);
     }
 
-    //GET BOOKMARKS
+
+    // ========================
+    // GET BOOKMARKS
+    // ========================
     public function getBookmarks($studentId)
     {
+        $db = \Config\Database::connect();
+
+        $db->transStart();
+
         $bookmarks = $this->Forum_PostsModel->getBookmarks($studentId);
+
+        $db->transComplete();
 
         return $this->respond($bookmarks);
     }
