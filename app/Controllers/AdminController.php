@@ -4,31 +4,37 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 
-use App\Models\AdminDepartmentModel;
-use App\Models\AdminCourseModel;
-use App\Models\AdminAnnouncementModel;
-use App\Models\AdminOrgModel;
-use App\Models\AdminKeywordModel;
-use App\Models\AdminDashboardModel;
+use App\Models\DepartmentsModel;
+use App\Models\CoursesModel;
+use App\Models\AnnouncementsModel;
+use App\Models\OrganisationsModel;
+use App\Models\Library_Upload_RequestModel;
+use App\Models\KeywordsModel;
+use App\Models\Activity_LogsModel;
+use App\Models\UserModel;
 
 class AdminController extends ResourceController
 {
-    protected $departmentModel;
-    protected $courseModel;
-    protected $announcementModel;
-    protected $orgModel;
-    protected $keywordModel;
-    protected $dashboardModel;
+    protected $DepartmentsModel;
+    protected $CoursesModel;
+    protected $AnnouncementsModel;
+    protected $OrganisationsModel;
+    protected $Library_Upload_RequestModel;
+    protected $KeywordsModel;
+    protected $Activity_LogsModel;
+    protected $UserModel;
     protected $db;
 
     public function __construct()
     {
-        $this->departmentModel = new AdminDepartmentModel();
-        $this->courseModel = new AdminCourseModel();
-        $this->announcementModel = new AdminAnnouncementModel();
-        $this->orgModel = new AdminOrgModel();
-        $this->keywordModel = new AdminKeywordModel();
-        $this->dashboardModel = new AdminDashboardModel();
+        $this->DepartmentsModel = new DepartmentsModel();
+        $this->CoursesModel = new CoursesModel();
+        $this->AnnouncementsModel = new AnnouncementsModel();
+        $this->OrganisationsModel = new OrganisationsModel();
+        $this->Library_Upload_RequestModel = new Library_Upload_RequestModel();
+        $this->KeywordsModel = new KeywordsModel();
+        $this->Activity_LogsModel = new Activity_LogsModel();
+        $this->UserModel = new UserModel();
 
         $this->db = \Config\Database::connect();
     }
@@ -41,27 +47,27 @@ class AdminController extends ResourceController
 
     public function getDepartments()
     {
-        return $this->respond($this->departmentModel->getDepartments());
+        return $this->respond($this->DepartmentsModel->getDepartments());
     }
 
-    public function createDepartment()
+    public function createDepartments()
     {
-        $data = $this->request->getJSON(true);
+        $data = $this->request->getPost();
 
         $this->db->transStart();
 
-        $this->departmentModel->createDepartment($data['department_title']);
+        $this->DepartmentsModel->createDepartments($data['department_title']);
 
         $this->db->transComplete();
 
         return $this->respond(["status"=>"success"]);
     }
 
-    public function deleteDepartment($id)
+    public function deleteDepartments($id)
     {
         $this->db->transStart();
 
-        $this->departmentModel->deleteDepartment($id);
+        $this->DepartmentsModel->deleteDepartments($id);
 
         $this->db->transComplete();
 
@@ -77,17 +83,17 @@ class AdminController extends ResourceController
     public function getCourses($departmentId)
     {
         return $this->respond(
-            $this->courseModel->getCoursesByDepartment($departmentId)
+            $this->CoursesModel->getCoursesByDepartment($departmentId)
         );
     }
 
-    public function createCourse()
+    public function createCourses()
     {
-        $data = $this->request->getJSON(true);
+        $data = $this->request->getPost();
 
         $this->db->transStart();
 
-        $this->courseModel->createCourse(
+        $this->CoursesModel->createCourses(
             $data['department_id'],
             $data['course_title']
         );
@@ -106,17 +112,17 @@ class AdminController extends ResourceController
     public function getAnnouncements()
     {
         return $this->respond(
-            $this->announcementModel->getAnnouncements()
+            $this->AnnouncementsModel->getAnnouncements()
         );
     }
 
-    public function createAnnouncement()
+    public function createAnnouncements()
     {
-        $data = $this->request->getJSON(true);
+        $data = $this->request->getPost();
 
         $this->db->transStart();
 
-        $this->announcementModel->createAnnouncement(
+        $this->AnnouncementsModel->createAnnouncements(
             $data['department_id'],
             $data['title'],
             $data['description'],
@@ -134,20 +140,20 @@ class AdminController extends ResourceController
     =============================
     */
 
-    public function getOrgs()
+    public function getOrganisations()
     {
         return $this->respond(
-            $this->orgModel->getOrgs()
+            $this->OrganisationsModel->getOrganisations()
         );
     }
 
-    public function createOrg()
+    public function createOrganisations()
     {
-        $data = $this->request->getJSON(true);
+        $data = $this->request->getPost();
 
         $this->db->transStart();
 
-        $this->orgModel->createOrg(
+        $this->OrganisationsModel->createOrganisations(
             $data['org_title'],
             $data['file_path'],
             $data['description']
@@ -167,17 +173,17 @@ class AdminController extends ResourceController
     public function getKeywords()
     {
         return $this->respond(
-            $this->keywordModel->getKeywords()
+            $this->KeywordsModel->getKeywords()
         );
     }
 
-    public function createKeyword()
+    public function createKeywords()
     {
-        $data = $this->request->getJSON(true);
+        $data = $this->request->getPost();
 
         $this->db->transStart();
 
-        $this->keywordModel->createKeyword(
+        $this->KeywordsModel->createKeywords(
             $data['keyword_tag']
         );
 
@@ -195,15 +201,15 @@ class AdminController extends ResourceController
     public function getUserStats()
     {
         return $this->respond(
-            $this->dashboardModel->getUserStats()
+            $this->UserModel->getUserStats()
         );
     }
 
-    public function approveLibraryUpload($requestId)
+    public function approveLibraryUploads($requestId)
     {
         $this->db->transStart();
 
-        $this->dashboardModel->approveLibraryUpload($requestId);
+        $this->Library_Upload_RequestModel->approveLibraryUploads($requestId);
 
         $this->db->transComplete();
 
@@ -212,11 +218,11 @@ class AdminController extends ResourceController
         ]);
     }
 
-    public function rejectLibraryUpload($requestId)
+    public function rejectLibraryUploads($requestId)
     {
         $this->db->transStart();
 
-        $this->dashboardModel->rejectLibraryUpload($requestId);
+        $this->Library_Upload_RequestModel->rejectLibraryUploads($requestId);
 
         $this->db->transComplete();
 
@@ -228,7 +234,7 @@ class AdminController extends ResourceController
     public function getActivityLogs()
     {
         return $this->respond(
-            $this->dashboardModel->getActivityLogs()
+            $this->Activity_LogsModel->getActivityLogs()
         );
     }
 }

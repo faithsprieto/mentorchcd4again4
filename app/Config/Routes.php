@@ -20,7 +20,7 @@ $routes->get('calendar', 'CalendarController::getAllCalendar');
 $routes->get('calendar/student/(:num)', 'CalendarController::getStudentCalendar/$1');
 
 //FORUM
-$$routes->get('forum/posts', 'ForumController::getAllPosts');
+$routes->get('forum/posts', 'ForumController::getAllPosts');
 $routes->get('forum/post/(:num)', 'ForumController::getPost/$1');
 $routes->get('forum/bookmarks/(:num)', 'ForumController::getBookmarks/$1');
 

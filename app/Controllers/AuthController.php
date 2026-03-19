@@ -12,7 +12,7 @@ class AuthController extends ResourceController
         $userModel = new UserModel();
 
         // Get JSON input
-        $input = $this->request->getJSON(true);
+        $input = $this->request->getPost();
 
         $identifier = $input['identifier'] ?? null; // student_id OR email
         $password   = $input['password'] ?? null;
