@@ -3,97 +3,92 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\ForumModel;
+
+use App\Models\Forum_PostsModel;
 
 class ForumController extends ResourceController
 {
-    protected $forumModel;
+    protected $Forum_PostsModel;
+
+
 
     public function __construct()
     {
-        $this->forumModel = new ForumModel();
+        $this->Forum_PostsModel = new Forum_PostsModel();
     }
 
-    //ALL POSTS
-    public function getAllPosts()
+    //GET POSTS
+    public function getPosts()
     {
-        $db = \Config\Database::connect();
+        $posts = $this->Forum_PostsModel
+            ->select('
+                forum_posts.post_id,
+                forum_posts.student_id,
+                user.first_name,
+                user.last_name,
+                user.profile_picture,
+                user.department,
+                user.course_program,
+                forum_posts.post_title,
+                forum_posts.post_description,
+                forum_posts.post_attachment,
+                forum_posts.date_time
+            ')
+            ->join('user', 'user.student_id = forum_posts.student_id', 'left')
+            ->orderBy('forum_posts.date_time', 'DESC')
+            ->paginate(15);
 
-        $db->transStart();
 
-        $posts = $this->forumModel->getAllPosts();
+    // GET ATTACHMENTS
+        $postIds = array_column($posts, 'post_id');
+        $attachments = $this->Forum_PostsModel->getAttachmentsByPostIds($postIds);
 
-        $this->forumModel->logAction(1);
-
-        $db->transComplete();
-
-        if ($db->transStatus() === FALSE) {
-            return $this->fail("Failed retrieving forum posts");
+        $grouped = [];
+        foreach ($attachments as $att) {
+            $grouped[$att['post_id']][] = $att;
         }
 
-        return $this->respond($posts);
-    }
-
-    //ONE POST FOR VIEWING
-    public function getPost($postId)
-    {
-        $db = \Config\Database::connect();
-
-        $db->transStart();
-
-        $post = $this->forumModel->getSinglePost($postId);
-        $comments = $this->forumModel->getComments($postId);
-
-        $this->forumModel->logAction(2);
-
-        $db->transComplete();
-
-        if (!$post) {
-            return $this->failNotFound("Post not found");
+        foreach ($posts as &$post) {
+            $post['attachments'] = $grouped[$post['post_id']] ?? [];
         }
 
-        $post['comments'] = $comments;
-
-        return $this->respond($post);
+        return $this->respond([
+            'data' => $posts,
+            'pager' => $this->Forum_PostsModel->pager->getDetails()
+        ]);
     }
 
-    //BOOKMARKS
-    public function getBookmarks($studentId)
-    {
-        $db = \Config\Database::connect();
-
-        $db->transStart();
-
-        $bookmarks = $this->forumModel->getBookmarks($studentId);
-
-        $db->transComplete();
-
-        if ($db->transStatus() === FALSE) {
-            return $this->fail("Failed retrieving bookmarks");
-        }
-
-        return $this->respond($bookmarks);
-    }
-
-    //COMMENTS
+    //GET COMMENTS
     public function getComments($postId)
     {
-        $sql = <<<SQL
-        SELECT
-            c.comment_id,
-            c.post_id,
-            c.student_id,
-            u.first_name,
-            u.last_name,
-            u.profile_picture,
-            c.comment_description,
-            c.date_time
-        FROM forum_comments c
-        LEFT JOIN user u ON u.student_id = c.student_id
-        WHERE c.post_id = ?
-        ORDER BY c.date_time ASC
-        SQL;
+        $comments = $this->Forum_PostsModel
+            ->select('
+                forum_comments.comment_id,
+                forum_comments.post_id,
+                forum_comments.student_id,
+                user.first_name,
+                user.last_name,
+                user.profile_picture,
+                forum_comments.comment_description,
+                forum_comments.date_time
+            ')
+            ->from('forum_comments')
+            ->join('user', 'user.student_id = forum_comments.student_id', 'left')
+            ->where('forum_comments.post_id', $postId)
+            ->orderBy('forum_comments.date_time', 'ASC')
+            ->paginate(20);
 
-        return $this->db->query($sql, [$postId])->getResultArray();
+        return $this->respond([
+            'data' => $comments,
+            'pager' => $this->Forum_PostsModel->pager->getDetails()
+        ]);
+    }
+
+    //GET BOOKMARKS
+    public function getBookmarks($studentId)
+    {
+        $bookmarks = $this->Forum_PostsModel->getBookmarks($studentId);
+
+        return $this->respond($bookmarks);
     }
 }

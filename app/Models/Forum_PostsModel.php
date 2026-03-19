@@ -6,25 +6,11 @@ use CodeIgniter\Model;
 
 class Forum_PostsModel extends Model
 {
-    protected $table            = 'forum_posts';
-    protected $primaryKey       = 'post_id';
-    protected $useAutoIncrement = true; 
+    protected $table = 'forum_posts';
+    protected $primaryKey = 'post_id';
+    protected $returnType = 'array';
 
-    protected $returnType       = 'array';
-    protected $protectFields    = true;
-
-    protected $allowedFields = [
-        'student_id',
-        'post_title',
-        'post_description',
-        'post_attachments',
-        'date_time',
-    ];
-
-    protected $useTimestamps = true;
-
-
-    public function getPosts($limit, $offset)
+    public function getPosts()
     {
         $sql = <<<SQL
         SELECT
@@ -42,14 +28,13 @@ class Forum_PostsModel extends Model
         FROM forum_posts p
         LEFT JOIN user u ON u.student_id = p.student_id
         ORDER BY p.date_time DESC
-        LIMIT ? OFFSET ?
         SQL;
 
-        return $this->db->query($sql, [$limit, $offset])->getResultArray();
+        return $this->query($sql)->getResultArray();
     }
 
 
-    public function getComments($postId, $limit, $offset)
+    public function getComments($postId)
     {
         $sql = <<<SQL
         SELECT
@@ -65,12 +50,43 @@ class Forum_PostsModel extends Model
         LEFT JOIN user u ON u.student_id = c.student_id
         WHERE c.post_id = ?
         ORDER BY c.date_time ASC
-        LIMIT ? OFFSET ?
         SQL;
 
-        return $this->db->query($sql, [$postId, $limit, $offset])->getResultArray();
+        return $this->db->query($sql, [$postId])->getResultArray();
     }
 
 
-    
+    public function getAttachmentsByPostIds($postIds)
+    {
+        if (empty($postIds)) return [];
+
+        $placeholders = implode(',', array_fill(0, count($postIds), '?'));
+
+        $sql = <<<SQL
+        SELECT
+            post_id,
+            file_path,
+            arrangement
+        FROM forum_posts_attachment
+        WHERE post_id IN ($placeholders)
+        ORDER BY arrangement ASC
+        SQL;
+
+        return $this->db->query($sql, $postIds)->getResultArray();
+    }
+
+
+    public function getAttachmentsByPostId($postId)
+    {
+        $sql = <<<SQL
+        SELECT
+            file_path,
+            arrangement
+        FROM forum_posts_attachment
+        WHERE post_id = ?
+        ORDER BY arrangement ASC
+        SQL;
+
+        return $this->db->query($sql, [$postId])->getResultArray();
+    }
 }
