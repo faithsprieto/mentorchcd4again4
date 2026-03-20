@@ -47,10 +47,10 @@ class KeywordsController extends ResourceController
         try {
             $this->db->transStart();
 
-            $tag = $this->request->getVar('keyword_tag');
+            $tag = $this->request->getPost('keyword_tag');
 
             if (empty($tag)) {
-                return $this->failValidationError('Keyword tag is required');
+                return $this->failValidationErrors('Keyword tag is required');
             }
 
             // OPTIONAL: prevent duplicates

@@ -63,15 +63,20 @@ class AdminController extends ResourceController
         return $this->respond(["status"=>"success"]);
     }
 
-    public function deleteDepartments($id)
+    public function deleteDepartments()
     {
+        $id = $this->request->getPost('department_id');
+
         $this->db->transStart();
 
         $this->DepartmentsModel->deleteDepartments($id);
 
         $this->db->transComplete();
 
-        return $this->respond(["status"=>"deleted"]);
+        return $this->respond([
+            "status" => "deleted",
+            "department_id" => $id
+        ]);
     }
 
     /*
@@ -80,11 +85,21 @@ class AdminController extends ResourceController
     =============================
     */
 
-    public function getCourses($departmentId)
+    public function getCourses()
     {
-        return $this->respond(
-            $this->CoursesModel->getCoursesByDepartment($departmentId)
-        );
+        $departmentId = $this->request->getGet('department_id');
+
+        if (!$departmentId) {
+            return $this->failValidationErrors('Department ID is required');
+        }
+
+        $this->db->transStart();
+
+        $courses = $this->CoursesModel->getCoursesByDepartment($departmentId);
+
+        $this->db->transComplete();
+
+        return $this->respond($courses);
     }
 
     public function createCourses()
@@ -200,63 +215,67 @@ class AdminController extends ResourceController
 
     public function getUserStats()
     {
-        return $this->respond(
-            $this->UserModel->getUserStats()
-        );
+        $this->db->transStart();
+
+        $stats = $this->UserModel->getUserStats();
+
+        $this->db->transComplete();
+
+        return $this->respond($stats);
     }
 
-    public function approveLibraryUpload($requestId)
-{
-    if (!$requestId) {
-        return $this->failValidationErrors('Request ID is required');
-    }
 
-    $this->db->transStart();
-
-    try {
-        $this->libraryRequestModel->approveLibraryUpload($requestId);
-    } catch (\Exception $e) {
-        $this->db->transRollback();
-        return $this->fail($e->getMessage());
-    }
-
-    $this->db->transComplete();
-
-    if ($this->db->transStatus() === false) {
-        return $this->fail('Failed to approve upload');
-    }
-
-    return $this->respond([
-        "status" => "approved"
-    ]);
-}
-
-
-    public function rejectLibraryUpload($requestId)
-{
-    if (!$requestId) {
-        return $this->failValidationErrors('Request ID is required');
-    }
-
-    $this->db->transStart();
-
-    $this->libraryRequestModel->rejectLibraryUpload($requestId);
-
-    $this->db->transComplete();
-
-    if ($this->db->transStatus() === false) {
-        return $this->fail('Failed to reject upload');
-    }
-
-    return $this->respond([
-        "status" => "rejected"
-    ]);
-}
-
-    public function getActivityLogs()
+    public function approveLibraryUpload()
     {
-        return $this->respond(
-            $this->Activity_LogsModel->getActivityLogs()
-        );
+        $requestId = $this->request->getPost('request_id');
+
+        if (!$requestId) {
+            return $this->failValidationErrors('Request ID is required');
+        }
+
+        $this->db->transStart();
+
+        try {
+            $this->libraryRequestModel->approveLibraryUpload($requestId);
+        } catch (\Exception $e) {
+            $this->db->transRollback();
+            return $this->fail($e->getMessage());
+        }
+
+        $this->db->transComplete();
+
+        if ($this->db->transStatus() === false) {
+            return $this->fail('Failed to approve upload');
+        }
+
+        return $this->respond([
+            "status" => "approved",
+            "request_id" => $requestId
+        ]);
+    }
+
+
+    public function rejectLibraryUpload()
+    {
+        $requestId = $this->request->getPost('request_id');
+
+        if (!$requestId) {
+            return $this->failValidationErrors('Request ID is required');
+        }
+
+        $this->db->transStart();
+
+        $this->libraryRequestModel->rejectLibraryUpload($requestId);
+
+        $this->db->transComplete();
+
+        if ($this->db->transStatus() === false) {
+            return $this->fail('Failed to reject upload');
+        }
+
+        return $this->respond([
+            "status" => "rejected",
+            "request_id" => $requestId
+        ]);
     }
 }

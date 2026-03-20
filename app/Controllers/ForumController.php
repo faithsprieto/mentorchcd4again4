@@ -7,62 +7,60 @@ use App\Models\Forum_PostsModel;
 
 class ForumController extends ResourceController
 {
-    protected $Forum_PostsModel;
+    protected $forumPostsModel;
 
     public function __construct()
     {
-        $this->Forum_PostsModel = new Forum_PostsModel();
+        $this->forumPostsModel = new Forum_PostsModel();
     }
 
     // ========================
     // GET POSTS (PAGINATED 15)
+    // Example: /forum/posts?page=1
     // ========================
     public function getPosts()
     {
-        $db = \Config\Database::connect();
+        $perPage = (int) ($this->request->getGet('per_page') ?? 15);
 
-        $db->transStart();
+        $posts = $this->forumPostsModel->getPostsPaginated($perPage);
 
-        // ✅ Use model paginate
-        $posts = $this->Forum_PostsModel->getPostsPaginated(15);
-
-        // 🔥 Attachments batching
         $postIds = array_column($posts, 'post_id');
 
         $attachments = [];
         if (!empty($postIds)) {
-            $attachments = $this->Forum_PostsModel->getAttachmentsByPostIds($postIds);
+            $attachments = $this->forumPostsModel->getAttachmentsByPostIds($postIds);
         }
 
-        $grouped = [];
-        foreach ($attachments as $att) {
-            $grouped[$att['post_id']][] = $att;
+        $groupedAttachments = [];
+        foreach ($attachments as $attachment) {
+            $groupedAttachments[$attachment['post_id']][] = $attachment;
         }
 
         foreach ($posts as &$post) {
-            $post['attachments'] = $grouped[$post['post_id']] ?? [];
+            $post['attachments'] = $groupedAttachments[$post['post_id']] ?? [];
         }
 
-        $db->transComplete();
-
         return $this->respond([
-            'data' => $posts,
-            'pager' => $this->Forum_PostsModel->pager->getDetails()
+            'data'  => $posts,
+            'pager' => $this->forumPostsModel->pager->getDetails(),
         ]);
     }
 
-
     // ========================
     // GET SINGLE POST
+    // Example: /forum/post?post_id=12
     // ========================
-    public function getPost($postId)
+    public function getPost()
     {
-        $db = \Config\Database::connect();
+        $postId = $this->request->getGet('post_id');
 
-        $db->transStart();
+        if (empty($postId)) {
+            return $this->failValidationErrors([
+                'post_id' => 'post_id is required.'
+            ]);
+        }
 
-        // ⚠️ Since paginate is used, we fetch directly
-        $post = $this->Forum_PostsModel
+        $post = $this->forumPostsModel
             ->where('post_id', $postId)
             ->first();
 
@@ -70,57 +68,60 @@ class ForumController extends ResourceController
             return $this->failNotFound('Post not found');
         }
 
-        // 🔥 Attachments
-        $attachments = $this->Forum_PostsModel->getAttachmentsByPostId($postId);
-
-        // 🔥 Comments (first page)
-        $comments = $this->Forum_PostsModel->getCommentsPaginated($postId, 20);
-
-        $db->transComplete();
+        $attachments = $this->forumPostsModel->getAttachmentsByPostId($postId);
+        $comments    = $this->forumPostsModel->getCommentsPaginated($postId, 20);
 
         $post['attachments'] = $attachments;
         $post['comments'] = [
-            'data' => $comments,
-            'pager' => $this->Forum_PostsModel->pager->getDetails()
+            'data'  => $comments,
+            'pager' => $this->forumPostsModel->pager->getDetails(),
         ];
 
         return $this->respond($post);
     }
 
-
     // ========================
     // GET COMMENTS (PAGINATED 20)
+    // Example: /forum/comments?post_id=12
     // ========================
-    public function getComments($postId)
+    public function getComments()
     {
-        $db = \Config\Database::connect();
+        $postId = $this->request->getGet('post_id');
 
-        $db->transStart();
+        if (empty($postId)) {
+            return $this->failValidationErrors([
+                'post_id' => 'post_id is required.'
+            ]);
+        }
 
-        $comments = $this->Forum_PostsModel->getCommentsPaginated($postId, 20);
+        $perPage = (int) ($this->request->getGet('per_page') ?? 20);
 
-        $db->transComplete();
+        $comments = $this->forumPostsModel->getCommentsPaginated($postId, $perPage);
 
         return $this->respond([
-            'data' => $comments,
-            'pager' => $this->Forum_PostsModel->pager->getDetails()
+            'data'  => $comments,
+            'pager' => $this->forumPostsModel->pager->getDetails(),
         ]);
     }
 
-
     // ========================
     // GET BOOKMARKS
+    // Example: /forum/bookmarks?student_id=2024001
     // ========================
-    public function getBookmarks($studentId)
+    public function getBookmarks()
     {
-        $db = \Config\Database::connect();
+        $studentId = $this->request->getGet('student_id');
 
-        $db->transStart();
+        if (empty($studentId)) {
+            return $this->failValidationErrors([
+                'student_id' => 'student_id is required.'
+            ]);
+        }
 
-        $bookmarks = $this->Forum_PostsModel->getBookmarks($studentId);
+        $bookmarks = $this->forumPostsModel->getBookmarks($studentId);
 
-        $db->transComplete();
-
-        return $this->respond($bookmarks);
+        return $this->respond([
+            'data' => $bookmarks
+        ]);
     }
-}
+} 

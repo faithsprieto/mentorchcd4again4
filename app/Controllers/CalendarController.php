@@ -24,9 +24,19 @@ class CalendarController extends ResourceController
         ]);
     }
 
-    public function getStudentCalendar($studentId)
+    public function getStudentCalendar()
     {
+        $studentId = $this->request->getGet('student_id');
+
+        if (!$studentId) {
+            return $this->failValidationErrors('Student ID is required');
+        }
+
+        $this->db->transStart();
+
         $calendar = $this->CalendarModel->getStudentCalendar($studentId);
+
+        $this->db->transComplete();
 
         return $this->respond([
             "status" => 200,
