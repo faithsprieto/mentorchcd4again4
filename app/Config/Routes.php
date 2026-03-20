@@ -24,6 +24,15 @@ $routes->get('forum/posts', 'ForumController::getAllPosts');
 $routes->get('forum/post/(:num)', 'ForumController::getPost/$1');
 $routes->get('forum/bookmarks/(:num)', 'ForumController::getBookmarks/$1');
 
+// MENTORCHIP
+$routes->get('mentorchip', 'MentorchipController::getAllMentorchip');
+$routes->get('mentorchip/user', 'MentorchipController::getUserMentorchip');
+
+//      - create, update, delete
+$routes->post('mentorchip', 'MentorchipController::createMentorchip');
+$routes->post('mentorchip/update', 'MentorchipController::updateMentorchip');
+$routes->post('mentorchip/delete', 'MentorchipController::deleteMentorchip');
+
 //ADMIN - department
 $routes->get('admin/departments', 'AdminController::getDepartments');
 $routes->post('admin/departments', 'AdminController::createDepartment');
@@ -44,6 +53,8 @@ $routes->post('admin/orgs', 'AdminController::createOrg');
 //     - keywords
 $routes->get('admin/keywords', 'AdminController::getKeywords');
 $routes->post('admin/keywords', 'AdminController::createKeyword');
+
+
 
 $routes->options('(:any)', static function(){
     return service ('response')
