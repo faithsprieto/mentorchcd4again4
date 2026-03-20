@@ -20,19 +20,4 @@ class Forum_BookmarksModel extends Model
     ];
 
 
-    public function getBookmarks($studentId)
-    {
-        $sql = <<<SQL
-        SELECT
-            b.bookmark_id,
-            b.post_id,
-            p.post_title,
-            p.date_time
-        FROM forum_bookmarks b
-        JOIN forum_posts p ON p.post_id = b.post_id
-        WHERE b.student_id = ?
-        SQL;
-
-        return $this->db->query($sql, [$studentId])->getResultArray();
-    }
 }

@@ -22,6 +22,7 @@ class OrganisationsModel extends Model
     ];
 
     protected $useTimestamps = true;
+    
     // ORGANISATIONS
     public function getOrganisations()
     {

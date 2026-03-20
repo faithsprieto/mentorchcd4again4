@@ -8,7 +8,7 @@ class Forum_DenormalizedModel extends Model
 {
     protected $table            = 'forum_denormalized';
     protected $primaryKey       = 'post_id';
-    protected $useAutoIncrement = true; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; 
 
     protected $returnType       = 'array';
     protected $protectFields    = true;

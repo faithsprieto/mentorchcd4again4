@@ -20,6 +20,7 @@ class DepartmentsModel extends Model
     ];
 
     protected $useTimestamps = true;
+    
     //DEPARTMENTS//
     public function getDepartments()
     {

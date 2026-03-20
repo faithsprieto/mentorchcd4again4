@@ -8,7 +8,7 @@ class Subject_TaggingModel extends Model
 {
     protected $table            = 'subject_tagging';
     protected $primaryKey       = 'tag_id';
-    protected $useAutoIncrement = false; // not marked AUTO_INCREMENT in dump
+    protected $useAutoIncrement = true; // not marked AUTO_INCREMENT in dump
 
     protected $returnType       = 'array';
     protected $protectFields    = true;
