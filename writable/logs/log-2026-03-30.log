@@ -1,0 +1,924 @@
+ERROR - 2026-03-30 09:59:30 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 09:59:30 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:01:03 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:01:03 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:01:10 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:01:10 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:01:23 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:01:23 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:01:44 --> Unknown column 'lur.id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keywords k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keywords k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keywords k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keywords k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:01:44 --> Unknown column 'lur.id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keywords k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keywords k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keywords k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.id AS library_file_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.id
+    LEFT JOIN keywords k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:12:30 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.request_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.request_id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.request_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.request_id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.request_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.request_id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.request_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.request_id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-03-30 10:12:30 --> Table 'mentorch.keyword' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('    SELECT
+        lur.request_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.request_id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('    SELECT
+        lur.request_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.request_id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('    SELECT
+        lur.request_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.request_id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 4 APPPATH\Models\Library_Upload_RequestModel.php(285): CodeIgniter\Database\BaseConnection->query('    SELECT
+        lur.request_id,
+        lur.student_id,
+        lur.title,
+        lur.file_name,
+        lur.file_path,
+        lur.status,
+        lur.updated_on,
+        lur.upload_date,
+        k.keyword_id,
+        k.keyword_tag
+    FROM library_upload_request lur
+    LEFT JOIN library_tagging lt
+        ON lt.library_file_id = lur.request_id
+    LEFT JOIN keyword k
+        ON k.keyword_id = lt.keyword_id
+    ORDER BY lur.upload_date DESC, k.keyword_tag ASC')
+ 5 APPPATH\Controllers\LibraryController.php(127): App\Models\Library_Upload_RequestModel->getFilesWithTags(null)
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\LibraryController->getFilesWithTags()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LibraryController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

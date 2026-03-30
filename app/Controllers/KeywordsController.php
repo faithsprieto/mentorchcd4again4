@@ -47,7 +47,7 @@ class KeywordsController extends ResourceController
         try {
             $this->db->transStart();
 
-            $tag = $this->request->getPost('keyword_tag');
+            $tag = $this->request->getPost('keyword');
 
             if (empty($tag)) {
                 return $this->failValidationErrors('Keyword tag is required');

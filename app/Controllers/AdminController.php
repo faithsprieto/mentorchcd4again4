@@ -236,7 +236,7 @@ class AdminController extends ResourceController
         $this->db->transStart();
 
         try {
-            $this->libraryRequestModel->approveLibraryUpload($requestId);
+            $this->Library_Upload_RequestModel->approveLibraryUpload($requestId);
         } catch (\Exception $e) {
             $this->db->transRollback();
             return $this->fail($e->getMessage());
@@ -265,7 +265,7 @@ class AdminController extends ResourceController
 
         $this->db->transStart();
 
-        $this->libraryRequestModel->rejectLibraryUpload($requestId);
+        $this->Library_Upload_RequestModel->rejectLibraryUpload($requestId);
 
         $this->db->transComplete();
 

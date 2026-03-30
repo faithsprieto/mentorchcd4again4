@@ -14,6 +14,7 @@ class KeywordsModel extends Model
     protected $protectFields    = true;
 
     protected $allowedFields = [
+        'keyword_id',
         'keyword_tag',
     ];
 

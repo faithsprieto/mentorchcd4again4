@@ -7,9 +7,12 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->post('auth/login', 'AuthController::login');
+$routes->post('user/register', 'UserController::register');
 
 //LIBRARY 
 $routes->get('library', 'LibraryController::getAllLibraryFiles');
+$routes->post('library/upload', 'LibraryController::uploadFile');
+$routes->get('library/files', 'LibraryController::getFilesWithTags');
 
 //MESSAGES
 $routes->get('messages', 'MessagesController::getAllMessages');
@@ -51,9 +54,8 @@ $routes->get('admin/orgs', 'AdminController::getOrgs');
 $routes->post('admin/orgs', 'AdminController::createOrg');
 
 //     - keywords
-$routes->get('admin/keywords', 'AdminController::getKeywords');
-$routes->post('admin/keywords', 'AdminController::createKeyword');
-
+$routes->get('keyword/list', 'KeywordsController::getAllKeywords');
+$routes->post('keyword/create', 'KeywordsController::createKeyword');
 
 
 $routes->options('(:any)', static function(){

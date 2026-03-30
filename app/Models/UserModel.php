@@ -27,7 +27,7 @@ class UserModel extends Model
         'user_type',
     ];
 
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     
     public function getUserStats()
     {
@@ -44,5 +44,44 @@ class UserModel extends Model
         SQL;
 
         return $this->db->query($sql)->getRow();
+    }
+    public function registerUser(array $data)
+    {
+        // Check duplicate email
+        if ($this->where('school_email', $data['school_email'])->first()) {
+            return [
+                'status'  => false,
+                'message' => 'School email already exists.'
+            ];
+        }
+
+        // Check duplicate student ID
+        if ($this->where('student_id', $data['student_id'])->first()) {
+            return [
+                'status'  => false,
+                'message' => 'Student ID already exists.'
+            ];
+        }
+
+        // Hash password
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        // Auto date
+        $data['register_date'] = date('Y-m-d H:i:s');
+
+        // Insert
+        if (!$this->insert($data)) {
+            return [
+                'status'  => false,
+                'message' => 'Registration failed.',
+                'errors'  => $this->errors()
+            ];
+        }
+
+        return [
+            'status'  => true,
+            'message' => 'User registered successfully.',
+            'user_id' => $this->getInsertID()
+        ];
     }
 }
